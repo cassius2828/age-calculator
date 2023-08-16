@@ -1,38 +1,148 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 15rem;
+}
+
+/* input */
+input {
+  margin: 2rem;
+  width: 50vw;
+  text-align: center;
+
+}
+
+ input,
+input::placeholder {
+    font-size: 2rem;
+}
+/* main container */
+
+.main-container {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border-bottom-right-radius: 100px;
+  border: solid 2px white;
+}
+
+/* top */
+
+.top-container {
+  width: 90vw;
+  display: flex;
+  justify-content: space-evenly;
+  /* border: solid 2px blue; */
+  margin: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.top-container p {
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: gray;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.col div {
+}
+
+.top-dates {
+  border: solid 1px gray;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
   color: white;
+  font-size: 3rem;
 }
 
-.App-link {
-  color: #61dafb;
+/* middle */
+.middle {
+  display: flex;
+
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+hr {
+  width: 75vw;
+  height: 0.1rem;
+  color: white;
+  position: relative;
+  top: 1.6rem;
+}
+
+.icon {
+  margin: auto;
+  z-index: 1;
+  background-color: rgb(30, 29, 32);
+  border-radius: 50%;
+  color: red;
+  position: relative;
+  cursor: pointer;
+}
+
+/* bottom */
+
+.bottom-container {
+  /* border: solid 2px yellow; */
+  margin: 2rem;
+}
+
+.bottom-container h1 {
+  font-size: 4rem;
+  margin: 0.5rem 0;
+}
+
+span {
+  color: red;
+}
+/* //////////////////////// */
+/* ! Media Query for Smaller Devices*/
+/* //////////////////////// */
+
+@media (min-width: 335px) and (max-width: 383px) {
+  .bottom-container h1 {
+    font-size: 3.2rem;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 426px) {
+     input,
+input::placeholder {
+    font-size: 1.35rem;
+}
+}
+
+/* //////////////////////// */
+/* ! Desktop Media Query*/
+/* //////////////////////// */
+
+@media (min-width: 768px) {
+  .top-container {
+    margin-right: 10rem;
   }
+
+  .middle {
+    flex-direction: row;
+  }
+  .icon {
+    width: 5rem;
+    height: 5rem;
+    top: -1rem;
+  }
+   input,
+input::placeholder {
+    font-size: 3rem;
+}
+
 }
