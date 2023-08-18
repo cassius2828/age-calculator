@@ -31,40 +31,66 @@ function App() {
     let splitDates = total.split(regex);
     // let totalDate = new Date(total);
     // setting dates
-
-    setCalDay(splitDates[1]);
-    setCalMonth(splitDates[0]);
-    setCalYear(splitDates[2]);
-
-    // calculation logic
     // * parse are for strings entered in input
-    // * for todays times we dont need to parse bc they are integers
-    let by = Number.parseFloat(calYear),
-      bm = Number.parseFloat(calMonth),
-      bd = Number.parseFloat(calDay),
+    setCalDay(Number.parseFloat(splitDates[1]));
+    setCalMonth(Number.parseFloat(splitDates[0]));
+    setCalYear(Number.parseFloat(splitDates[2]));
+
+    // calculation logic below
+    let by = calYear,
+      bm = calMonth,
+      bd = calDay,
       ty = date.getFullYear(),
       tm = date.getMonth() + 1,
       td = date.getDate();
-// ! affected area #1
-    if (td < bd 
-      // && td - bd > 0
-      ) {
+
+    //* does not allow future dates to be entered
+    if (ty < by) {
+      setYears(-1);
+      setMonths(-1);
+      setDays(-1);
+      return;
+    } else if (tm < bm && ty <= by) {
+      setYears(-1);
+      setMonths(-1);
+      setDays(-1);
+      return;
+    } else if (td < bd && tm <= bm && ty <= by) {
+      setYears(-1);
+      setMonths(-1);
+      setDays(-1);
+      return;
+    }
+    // remaining date calculation logic
+    if (td < bd && tm - bm > 0) {
       setDays(td - bd + 30);
       tm = tm - 1;
+    } else if (td < bd && tm - bm <= 0) {
+      setDays(td - bd + 30);
+    } else if (td < bd) {
+      setDays(bd - td);
     } else {
       setDays(td - bd);
-      // ty = ty - 1;
     }
-    if (tm < bm 
-      // && tm - bm > 0
-      ) {
+    if (tm < bm) {
       setMonths(tm - bm + 12);
     } else {
       setMonths(tm - bm);
     }
-    setYears(ty - by);
+
+    if (ty === by) {
+      setYears(0);
+    } else if (ty > by && months > 10) {
+      setYears(ty - by - 1);
+    } else {
+      setYears(ty - by);
+    }
   };
 
+  //? currently this runs continuously so that the button renders the results on one click,
+  //? I understand this can cause performance issues on large scale projects
+  //? I am currently trying to figure out a way to render all actions on a single click while not running a
+  //? useEffect continously without dependencies
   useEffect(() => {
     getAge();
   });
@@ -89,6 +115,7 @@ function App() {
           years={years}
           handleClick={getAge}
           blank="--"
+          date={date}
         />
       </div>
     </div>
@@ -106,24 +133,26 @@ export const Dates = ({
   years,
   handleClick,
   blank,
+  date,
 }) => {
   return (
     <>
+      {/* top container */}
       <div className="top-container">
         <div className="col">
           <p>month</p>
-          <div>{calMonth}</div>
+          <div>{calMonth ? calMonth : "--"}</div>
         </div>
         <div className="col">
           <p>day</p>
-          <div>{calDay}</div>
+          <div>{calDay ? calDay : "--"}</div>
         </div>
         <div className="col">
           <p> year </p>
-          <div>{calYear}</div>
+          <div>{calYear ? calYear : "--"}</div>
         </div>
       </div>
-
+      {/* middle container */}
       <div className="middle">
         <hr></hr>
         <FontAwesomeIcon
@@ -133,19 +162,18 @@ export const Dates = ({
           icon={faArrowAltCircleDown}
         />
       </div>
+      {/* bottom container */}
       <div className="bottom-container">
-        {/* this logic controls user input to ensure accurate dates have been recorded */}
-        {/* // ! affected area #2 */}
-        {years < 0 && days < 0 && months < 0 ? (
-          <h1 style={{ margin: "6rem" }}>You haven't been born yet silly :P</h1>
-        ) : calDay > 31 || calMonth > 12 ? (
-          <h1 style={{ margin: "6rem" }}>
-            That is not a real date my friend :/
+        {/* //* this logic controls user input to ensure accurate dates have been recorded */}
+        {calYear > date.getFullYear() ? (
+          <h1>
+            You haven't been born yet... unless you are a time traveler! O_o
           </h1>
+        ) : calDay > 31 || calMonth > 12 ? (
+          <h1>That is not a real date my friend :/</h1>
         ) : (
           <>
-            {/* // ! affected area #3 */}
-
+            {/*//* dashes to fill space before numbers are entered */}
             <h1>
               <span>{years >= 0 ? years : blank} </span>
               years

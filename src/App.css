@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15rem;
 }
 
 /* input */
@@ -12,12 +11,11 @@ input {
   margin: 2rem;
   width: 50vw;
   text-align: center;
-
 }
 
- input,
+input,
 input::placeholder {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 /* main container */
 
@@ -37,7 +35,7 @@ input::placeholder {
   width: 90vw;
   display: flex;
   justify-content: space-evenly;
-  /* border: solid 2px blue; */
+
   margin: 2rem;
   font-size: 2rem;
   font-weight: 600;
@@ -55,9 +53,6 @@ input::placeholder {
   align-items: center;
 }
 
-.col div {
-}
-
 .top-dates {
   border: solid 1px gray;
   padding: 0.5rem 1rem;
@@ -69,7 +64,6 @@ input::placeholder {
 /* middle */
 .middle {
   display: flex;
-
   flex-direction: column;
 }
 
@@ -94,7 +88,6 @@ hr {
 /* bottom */
 
 .bottom-container {
-  /* border: solid 2px yellow; */
   margin: 2rem;
 }
 
@@ -110,17 +103,23 @@ span {
 /* ! Media Query for Smaller Devices*/
 /* //////////////////////// */
 
-@media (min-width: 335px) and (max-width: 383px) {
-  .bottom-container h1 {
-    font-size: 3.2rem;
-  }
-}
-
-@media (max-width: 426px) {
-     input,
-input::placeholder {
+@media (max-width: 500px) {
+  .top-container p {
     font-size: 1.35rem;
-}
+  }
+
+  .bottom-container h1 {
+    font-size: 2rem;
+  }
+
+  input,
+  input::placeholder {
+    font-size: 1.25rem;
+  }
+
+  .top-dates {
+    font-size: 1.25rem;
+  }
 }
 
 /* //////////////////////// */
@@ -140,9 +139,8 @@ input::placeholder {
     height: 5rem;
     top: -1rem;
   }
-   input,
-input::placeholder {
+  input,
+  input::placeholder {
     font-size: 3rem;
-}
-
+  }
 }
